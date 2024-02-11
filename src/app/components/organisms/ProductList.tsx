@@ -8,10 +8,10 @@ type ProductListType = {
 
 export const ProductList = ({ products }: ProductListType) => {
 	return (
-		<div className="flex items-center justify-center gap-3" data-testid="products-list">
+		<ul className="flex items-center justify-center gap-3" data-testid="products-list">
 			{products.map((product: ProductType) => (
 				<ProductItemImage product={product} key={product.id} />
 			))}
-		</div>
+		</ul>
 	);
 };
