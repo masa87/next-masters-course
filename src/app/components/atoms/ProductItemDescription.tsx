@@ -7,16 +7,20 @@ type ProductItemDescriptionProps = {
 };
 
 export const ProductItemDescription = ({
-	product: { category, price },
+	product: { name, category, price },
 }: ProductItemDescriptionProps) => {
 	return (
-		<div className="mt-2 flex flex-col">
-			<div className="flex justify-between text-sm text-gray-500 first-letter:capitalize dark:text-gray-400">
-				Produkt <span className="font-bold">{formatPrice(price / 100)}</span>
+		<div className="mt-2 flex flex-col px-3">
+			<div className="flex justify-between">
+				<h3 className=" text-sm text-gray-500 first-letter:capitalize dark:text-gray-400">
+					{name}
+				</h3>
+				<p className="font-bold">{formatPrice(price / 100)}</p>
 			</div>
-			<div className="mt-1 text-xs italic text-gray-500 first-letter:capitalize dark:text-gray-400">
+
+			<p className="mt-1 text-xs italic text-gray-500 first-letter:capitalize dark:text-gray-400">
 				{category}
-			</div>
+			</p>
 		</div>
 	);
 };

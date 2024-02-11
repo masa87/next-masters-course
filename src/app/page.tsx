@@ -6,6 +6,7 @@ export default function Home() {
 			id: "1",
 			category: "plecaki",
 			price: 12000,
+			name: "Plecak",
 			coverImage: {
 				src: "/picture_1.jpg",
 				alt: "Plecak dzieciecy",
@@ -15,6 +16,7 @@ export default function Home() {
 			id: "2",
 			category: "plecaki",
 			price: 5567,
+			name: "Torba",
 			coverImage: {
 				src: "/picture_2.jpg",
 				alt: "Plecak dzieciecy",
@@ -22,6 +24,7 @@ export default function Home() {
 		},
 		{
 			id: "3",
+			name: "czarny plecak",
 			category: "plecaki",
 			price: 2340,
 			coverImage: {
@@ -31,6 +34,7 @@ export default function Home() {
 		},
 		{
 			id: "4",
+			name: "Buty",
 			category: "plecaki",
 			price: 2345,
 			coverImage: {
