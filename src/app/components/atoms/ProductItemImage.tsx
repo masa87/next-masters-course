@@ -8,7 +8,7 @@ type ProductItemImageProps = {
 
 export const ProductItemImage = ({ product }: ProductItemImageProps) => {
 	return (
-		<div className="group h-full cursor-pointer bg-slate-100 p-3 shadow-md transition-all hover:bg-slate-200">
+		<li className="group h-full cursor-pointer bg-slate-100 p-3 shadow-md transition-all hover:bg-slate-200">
 			<Image
 				className="h-[200px] w-[200px] transition-all group-hover:scale-105"
 				src={product.coverImage.src}
@@ -18,6 +18,6 @@ export const ProductItemImage = ({ product }: ProductItemImageProps) => {
 				style={{ objectFit: "scale-down" }}
 			/>
 			<ProductItemDescription product={product} />
-		</div>
+		</li>
 	);
 };
