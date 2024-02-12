@@ -10,17 +10,13 @@ export const ProductItemDescription = ({
 	product: { name, category, price },
 }: ProductItemDescriptionProps) => {
 	return (
-		<div className="mt-2 flex flex-col px-3">
+		<div className="p-6">
 			<div className="flex justify-between">
-				<h3 className=" text-sm text-gray-500 first-letter:capitalize dark:text-gray-400">
-					{name}
-				</h3>
-				<p className="font-bold">{formatPrice(price / 100)}</p>
+				<h3 className="mb-2 text-xl font-semibold first-letter:capitalize ">{name}</h3>
+				<p className="font-bold text-slate-800">{formatPrice(price / 100)}</p>
 			</div>
 
-			<p className="mt-1 text-xs italic text-gray-500 first-letter:capitalize dark:text-gray-400">
-				{category}
-			</p>
+			<p className="mb-4 text-gray-600 first-letter:capitalize ">{category}</p>
 		</div>
 	);
 };
