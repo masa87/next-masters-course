@@ -3,8 +3,8 @@
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"editor.codeActionsOnSave": {
-    "source.fixAll": "explicit"
-  },
+		"source.fixAll": "explicit"
+	},
 	"graphql-config.dotEnvPath": "./.env",
 	"graphql-config.load.configName": "graphql",
 	"files.associations": {
@@ -12,5 +12,6 @@
 	},
 	"editor.quickSuggestions": {
 		"strings": true
-	}
+	},
+	"editor.mouseWheelZoom": true
 }
