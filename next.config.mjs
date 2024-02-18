@@ -1,4 +1,29 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+import * as NextMdx from "@next/mdx";
 
-export default nextConfig;
+// ...
+
+const withMDX = NextMdx.default({
+	extension: /\.mdx?$/,
+	options: {
+		remarkPlugins: [], // ESM ✅
+	},
+});
+
+const nextConfig = {
+	pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
+	experimental: {
+		typedRoutes: true,
+		mdxRs: true,
+	},
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "naszsklep-api.vercel.app",
+			},
+		],
+	},
+};
+
+export default withMDX(nextConfig);
