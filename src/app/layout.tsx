@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
-import Navigation from "./components/Navigation";
-import Footer from "./components/Footer";
+import Navigation from "./components/organisms/Navigation";
+import Footer from "./components/organisms/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const montseratt = Montserrat({ subsets: ["latin", "latin-ext"] });
 
 export const metadata: Metadata = {
 	title: "Best shop ever",
@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="pl">
-			<body className={`${inter.className} bg-gray-100`}>
+			<body className={`${montseratt.className} bg-gray-100`}>
 				<Navigation />
 				<main className="container mx-auto min-h-[calc(100vh-52px)] px-4 pb-4 pt-20">
 					{children}

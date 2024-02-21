@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import { ProductItemImage } from "../atoms/ProductItemImage";
 import { ProductItemDescription } from "../atoms/ProductItemDescription";
@@ -12,7 +13,9 @@ const ProductItem = ({ product }: ProductItemProps) => {
 	return (
 		<Link href={`/product/${product.id}`}>
 			<article>
-				<ProductItemImage product={product} />
+				<Suspense>
+					<ProductItemImage product={product} />
+				</Suspense>
 				<ProductItemDescription product={product} />
 			</article>
 		</Link>

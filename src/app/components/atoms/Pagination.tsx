@@ -5,7 +5,7 @@ interface PaginationProps {
 	totalPages?: number;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
+const Pagination = ({ currentPage, totalPages }: PaginationProps) => {
 	const hasPreviousPage = currentPage > 1;
 	const hasNextPage = (totalPages && currentPage < totalPages) || 1;
 
@@ -16,9 +16,9 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
 					<li>
 						<Link
 							href={`/products/${currentPage - 1}`}
-							className="rounded-md bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600"
+							className="rounded-md bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-600"
 						>
-							Poprzednia
+							Previous
 						</Link>
 					</li>
 				)}
@@ -27,7 +27,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
 					<li key={page}>
 						<Link
 							href={`/products/${currentPage}`}
-							className={`rounded-md px-4 py-2 ${currentPage === page ? "bg-blue-500 text-white" : "hover:bg-blue-200"}`}
+							className={`rounded-md px-4 py-2 ${currentPage === page ? "bg-blue-600 text-white" : "hover:bg-blue-200"}`}
 						>
 							{currentPage}
 						</Link>
@@ -38,9 +38,9 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
 					<li>
 						<Link
 							href={`/products/${currentPage + 1}`}
-							className="rounded-md bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600"
+							className="rounded-md bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-600"
 						>
-							Nastepna
+							Next
 						</Link>
 					</li>
 				)}

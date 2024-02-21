@@ -1,9 +1,10 @@
 import { Suspense } from "react";
-import Pagination from "./components/atoms/Pagination";
 import { ProductList } from "./components/organisms/ProductList";
+import { getOnlyXItems } from "./api/getAllProducts";
+import Spinner from "./components/atoms/Spinner";
 
 export default async function Home() {
-	// const products = await getOnlyXItems(20);
+	const products = await getOnlyXItems(8);
 
 	return (
 		<section className="container mx-auto">
@@ -11,14 +12,10 @@ export default async function Home() {
 				className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
 				data-testid="products-list"
 			>
-				<Suspense>
-					<ProductList page={1} />
-				</Suspense>
-				<Suspense>
-					<ProductList page={2} />
+				<Suspense fallback={<Spinner />}>
+					<ProductList products={products} />
 				</Suspense>
 			</ul>
-			<Pagination currentPage={1} />
 		</section>
 	);
 }
