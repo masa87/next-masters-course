@@ -1,5 +1,5 @@
 import React from "react";
-import { ActiveLink } from "./atoms/ActiveLink";
+import { ActiveLink } from "../atoms/ActiveLink";
 
 const Navigation = () => {
 	return (
@@ -17,7 +17,7 @@ const Navigation = () => {
 						href={"/products"}
 						className="text-white transition-all hover:text-blue-500"
 						activeClassName="border-b-2 border-blue-500"
-						exact={true}
+						exact={false}
 					>
 						All
 					</ActiveLink>

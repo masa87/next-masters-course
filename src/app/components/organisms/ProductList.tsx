@@ -1,6 +1,8 @@
-import React from "react";
+import React, { Suspense } from "react";
+import { notFound } from "next/navigation";
 import { type ProductType } from "../types";
 import ProductItem from "../molecules/ProductItem";
+import Spinner from "../atoms/Spinner";
 import { getItemsWithOffset } from "@/app/api/getAllProducts";
 type ProductListType = {
 	products?: ProductType[];
@@ -10,15 +12,19 @@ type ProductListType = {
 export const ProductList = async ({ products, page }: ProductListType) => {
 	let productToView: ProductType[] = [];
 	if (page) {
-		const take = 10;
+		const take = 8;
 		const offset = 10 * (page - 1);
 		productToView = await getItemsWithOffset(take, offset);
 	} else if (products) {
 		productToView = products;
 	}
 
+	if (!productToView) {
+		throw notFound();
+	}
+
 	return (
-		<>
+		<Suspense fallback={<Spinner />}>
 			{productToView.map((product: ProductType) => (
 				<li
 					key={product.id}
@@ -27,6 +33,6 @@ export const ProductList = async ({ products, page }: ProductListType) => {
 					<ProductItem product={product} />
 				</li>
 			))}
-		</>
+		</Suspense>
 	);
 };
