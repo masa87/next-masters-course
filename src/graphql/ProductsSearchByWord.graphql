@@ -1,0 +1,11 @@
+query ProductsSearchByWord($searchBy: String!) {
+	products(search: $searchBy) {
+		data {
+			...ProductItemFragment
+		}
+		meta {
+			count
+			total
+		}
+	}
+}

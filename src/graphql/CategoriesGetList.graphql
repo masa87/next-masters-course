@@ -1,0 +1,19 @@
+query CategoriesGetList($countItems: Int!, $offset: Int!) {
+	categories(take: $countItems, skip: $offset) {
+		data {
+			id
+			name
+			slug
+			description
+			products {
+				images {
+					url
+				}
+			}
+		}
+		meta {
+			count
+			total
+		}
+	}
+}

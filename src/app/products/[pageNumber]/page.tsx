@@ -1,12 +1,14 @@
 import { Suspense } from "react";
-import { getAllProducts, getItemsWithOffset } from "@/app/api/getAllProducts";
-import Pagination from "@/app/components/atoms/Pagination";
+import { notFound } from "next/navigation";
 import { ProductList } from "@/app/components/organisms/ProductList";
 import Spinner from "@/app/components/atoms/Spinner";
+import Pagination from "@/app/components/atoms/Pagination";
+import { executeGraphql } from "@/app/api/graphqlApi";
+import { ProductsGetListByCountItemsDocument, ProductsGetListDocument } from "@/gql/graphql";
 
 export const generateStaticParams = async () => {
-	const allProducts = await getAllProducts();
-	return allProducts.map((product) => {
+	const allProducts = await executeGraphql(ProductsGetListDocument);
+	return allProducts.products.data.map((product) => {
 		return {
 			productId: product.id,
 		};
@@ -18,7 +20,18 @@ export default async function ProductPageWithPagination({
 }: {
 	params: { pageNumber: string };
 }) {
-	const products = await getItemsWithOffset(20, (parseInt(params.pageNumber) - 1) * 20);
+	const countItems: number = 8;
+	const offset = (parseInt(params.pageNumber) - 1) * 8;
+	const products = await executeGraphql(ProductsGetListByCountItemsDocument, {
+		countItems: countItems,
+		offset: offset,
+	});
+
+	if (!products.products.data.length) {
+		notFound();
+	}
+
+	const productsToRender = products.products.data;
 
 	return (
 		<section className="container mx-auto">
@@ -27,10 +40,15 @@ export default async function ProductPageWithPagination({
 					className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
 					data-testid="products-list"
 				>
-					<ProductList products={products} page={parseInt(params.pageNumber)} />
+					<ProductList products={productsToRender} page={parseInt(params.pageNumber)} />
 				</ul>
 			</Suspense>
-			<Pagination currentPage={parseInt(params.pageNumber)} />
+			<Pagination
+				currentPage={parseInt(params.pageNumber)}
+				countItems={products.products.meta.count}
+				itemsPerPage={countItems}
+				totalItemsCount={products.products.meta.total}
+			/>
 		</section>
 	);
 }

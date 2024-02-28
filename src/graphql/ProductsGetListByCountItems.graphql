@@ -1,0 +1,11 @@
+query ProductsGetListByCountItems($countItems: Int!, $offset: Int!) {
+	products(take: $countItems, skip: $offset) {
+		data {
+			...ProductItemFragment
+		}
+		meta {
+			count
+			total
+		}
+	}
+}

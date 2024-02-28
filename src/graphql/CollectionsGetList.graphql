@@ -1,0 +1,19 @@
+query CollectionsGetList($countItems: Int!, $offset: Int!) {
+	collections(take: $countItems, skip: $offset) {
+		data {
+			id
+			name
+			description
+			slug
+			products {
+				images {
+					url
+				}
+			}
+		}
+		meta {
+			count
+			total
+		}
+	}
+}
