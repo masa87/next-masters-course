@@ -1,0 +1,5 @@
+query ProductGetItemById($productId: ID!) {
+	product(id: $productId) {
+		...ProductItemFragment
+	}
+}

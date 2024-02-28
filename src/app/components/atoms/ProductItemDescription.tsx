@@ -1,22 +1,22 @@
 import React from "react";
-import { type ProductType } from "../types";
 import { formatPrice } from "../utils";
+import { type ProductItemFragmentFragment } from "@/gql/graphql";
 
 type ProductItemDescriptionProps = {
-	product: ProductType;
+	product: ProductItemFragmentFragment;
 };
 
 export const ProductItemDescription = ({
-	product: { name, category, price },
+	product: { name, categories, price },
 }: ProductItemDescriptionProps) => {
 	return (
-		<div className="p-6">
+		<div className="flex flex-col justify-between gap-5 px-6 py-4">
+			<h3 className="text-center text-xl font-semibold first-letter:capitalize">{name}</h3>
 			<div className="flex justify-between">
-				<h3 className="mb-2 text-xl font-semibold first-letter:capitalize ">{name}</h3>
+				<p className=" text-gray-600 first-letter:capitalize ">{categories[0]?.name}</p>
+
 				<p className="font-bold text-slate-800">{formatPrice(price / 100)}</p>
 			</div>
-
-			<p className="mb-4 text-gray-600 first-letter:capitalize ">{category}</p>
 		</div>
 	);
 };

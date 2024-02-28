@@ -1,0 +1,11 @@
+query ProductsGetList {
+	products {
+		data {
+			...ProductItemFragment
+		}
+		meta {
+			count
+			total
+		}
+	}
+}

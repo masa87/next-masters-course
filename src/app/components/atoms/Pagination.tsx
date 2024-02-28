@@ -2,47 +2,115 @@ import Link from "next/link";
 
 interface PaginationProps {
 	currentPage: number;
-	totalPages?: number;
+	countItems: number;
+	itemsPerPage: number;
+	totalItemsCount: number;
 }
 
-const Pagination = ({ currentPage, totalPages }: PaginationProps) => {
-	const hasPreviousPage = currentPage > 1;
-	const hasNextPage = (totalPages && currentPage < totalPages) || 1;
+const Pagination = ({
+	currentPage,
+	countItems,
+	itemsPerPage,
+	totalItemsCount,
+}: PaginationProps) => {
+	const isNextpageAvailable = countItems >= itemsPerPage;
 
 	return (
 		<div className="mt-8 flex justify-center" aria-label="pagination">
-			<ul className="flex space-x-4">
-				{hasPreviousPage && (
+			<ul className="inline-flex -space-x-px text-sm">
+				{currentPage > 1 && (
 					<li>
 						<Link
 							href={`/products/${currentPage - 1}`}
-							className="rounded-md bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-600"
+							className="ms-0 flex h-8 items-center justify-center rounded-s-lg border border-e-0 border-gray-300 bg-white px-3 
+            leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
 						>
 							Previous
 						</Link>
 					</li>
 				)}
-
-				{Array.from({ length: totalPages || 1 }, (_, i) => i + 1).map((page) => (
-					<li key={page}>
-						<Link
-							href={`/products/${currentPage}`}
-							className={`rounded-md px-4 py-2 ${currentPage === page ? "bg-blue-600 text-white" : "hover:bg-blue-200"}`}
+				{currentPage > 3 && (
+					<>
+						<li>
+							<Link
+								href={`/products/${1}`}
+								className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500
+             hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+							>
+								1
+							</Link>
+						</li>
+						<li
+							className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500
+             hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
 						>
-							{currentPage}
-						</Link>
-					</li>
-				))}
-
-				{hasNextPage && (
+							...
+						</li>
+						<li>
+							<Link
+								href={`/products/${currentPage - 2}`}
+								className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500
+             hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+							>
+								{currentPage - 2}
+							</Link>
+						</li>
+					</>
+				)}
+				{currentPage > 1 && (
 					<li>
 						<Link
-							href={`/products/${currentPage + 1}`}
-							className="rounded-md bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-600"
+							href={`/products/${currentPage - 1}`}
+							className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500
+             hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
 						>
-							Next
+							{currentPage - 1}
 						</Link>
 					</li>
+				)}
+				<li>
+					<Link
+						href={`/products/${currentPage}`}
+						aria-current="page"
+						className="flex h-8 items-center justify-center border border-gray-300 bg-blue-50 px-3 text-blue-600 hover:bg-blue-100
+             hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+					>
+						{currentPage}
+					</Link>
+				</li>
+				{isNextpageAvailable && (
+					<>
+						{" "}
+						<li>
+							<Link
+								href={`/products/${currentPage + 1}`}
+								className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 
+            hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+							>
+								{currentPage + 1}
+							</Link>
+						</li>
+						{(currentPage + 2) * itemsPerPage <= totalItemsCount && (
+							<li>
+								<Link
+									href={`/products/${currentPage + 2}`}
+									className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 
+            hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+								>
+									{currentPage + 2}
+								</Link>
+							</li>
+						)}
+						<li>
+							<Link
+								href={`/products/${currentPage + 1}`}
+								className="flex h-8 items-center justify-center rounded-e-lg border border-gray-300 bg-white px-3 leading-tight
+             text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+							>
+								Next
+							</Link>
+						</li>
+					</>
 				)}
 			</ul>
 		</div>

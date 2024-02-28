@@ -3,10 +3,10 @@ import React, { Suspense } from "react";
 import Link from "next/link";
 import { ProductItemImage } from "../atoms/ProductItemImage";
 import { ProductItemDescription } from "../atoms/ProductItemDescription";
-import { type ProductType } from "../types";
+import { type ProductItemFragmentFragment } from "@/gql/graphql";
 
 type ProductItemProps = {
-	product: ProductType;
+	product: ProductItemFragmentFragment;
 };
 
 const ProductItem = ({ product }: ProductItemProps) => {
@@ -14,7 +14,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
 		<Link href={`/product/${product.id}`}>
 			<article>
 				<Suspense>
-					<ProductItemImage product={product} />
+					{product.images[0] && <ProductItemImage url={product.images[0].url} alt={product.name} />}
 				</Suspense>
 				<ProductItemDescription product={product} />
 			</article>

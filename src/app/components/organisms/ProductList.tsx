@@ -1,31 +1,22 @@
 import React, { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { type ProductType } from "../types";
 import ProductItem from "../molecules/ProductItem";
 import Spinner from "../atoms/Spinner";
-import { getItemsWithOffset } from "@/app/api/getAllProducts";
+import { type ProductItemFragmentFragment } from "@/gql/graphql";
+
 type ProductListType = {
-	products?: ProductType[];
+	products?: ProductItemFragmentFragment[];
 	page?: number;
 };
 
-export const ProductList = async ({ products, page }: ProductListType) => {
-	let productToView: ProductType[] = [];
-	if (page) {
-		const take = 8;
-		const offset = 10 * (page - 1);
-		productToView = await getItemsWithOffset(take, offset);
-	} else if (products) {
-		productToView = products;
-	}
-
-	if (!productToView) {
+export const ProductList = async ({ products }: ProductListType) => {
+	if (!products) {
 		throw notFound();
 	}
 
 	return (
 		<Suspense fallback={<Spinner />}>
-			{productToView.map((product: ProductType) => (
+			{products.map((product) => (
 				<li
 					key={product.id}
 					className="cursor-pointer overflow-hidden rounded-lg bg-white shadow-md transition-all hover:scale-105"

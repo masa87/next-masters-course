@@ -1,10 +1,14 @@
 import { Suspense } from "react";
 import { ProductList } from "./components/organisms/ProductList";
-import { getOnlyXItems } from "./api/getAllProducts";
 import Spinner from "./components/atoms/Spinner";
+import { executeGraphql } from "./api/graphqlApi";
+import { ProductsGetListByCountItemsDocument } from "@/gql/graphql";
 
 export default async function Home() {
-	const products = await getOnlyXItems(8);
+	const products = await executeGraphql(ProductsGetListByCountItemsDocument, {
+		countItems: 8,
+		offset: 0,
+	});
 
 	return (
 		<section className="container mx-auto">
@@ -13,7 +17,7 @@ export default async function Home() {
 				data-testid="products-list"
 			>
 				<Suspense fallback={<Spinner />}>
-					<ProductList products={products} />
+					<ProductList products={products.products.data} />
 				</Suspense>
 			</ul>
 		</section>
