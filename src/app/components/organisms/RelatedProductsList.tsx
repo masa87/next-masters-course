@@ -16,23 +16,32 @@ const RelatedProductsList = async ({ categorySlug }: RelatedProductsListProsp) =
 	let relatedProducts: ProductItemFragmentFragment[] = [];
 
 	const getListByCollection = async () => {
-		const products = await executeGraphql(CollectionGetProductsListDocument, {
-			slug: categorySlug,
+		const products = await executeGraphql({
+			query: CollectionGetProductsListDocument,
+			variables: {
+				slug: categorySlug,
+			},
 		});
 
 		return products;
 	};
 
 	const getAllProducts = async () => {
-		const products = await executeGraphql(ProductsGetListByCountItemsDocument, {
-			countItems: 4,
-			offset: 0,
+		const products = await executeGraphql({
+			query: ProductsGetListByCountItemsDocument,
+			variables: {
+				countItems: 4,
+				offset: 0,
+			},
 		});
 		return products;
 	};
 
-	await executeGraphql(CategoryGetProductsListDocument, {
-		slug: categorySlug,
+	await executeGraphql({
+		query: CategoryGetProductsListDocument,
+		variables: {
+			slug: categorySlug,
+		},
 	}).then((res) => {
 		if (res.category?.products) {
 			relatedProducts = res.category?.products;

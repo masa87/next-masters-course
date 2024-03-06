@@ -7,9 +7,12 @@ import { CollectionsGetListDocument } from "@/gql/graphql";
 import { executeGraphql } from "@/app/api/graphqlApi";
 
 export const generateStaticParams = async () => {
-	const collections = await executeGraphql(CollectionsGetListDocument, {
-		countItems: 8,
-		offset: 0,
+	const collections = await executeGraphql({
+		query: CollectionsGetListDocument,
+		variables: {
+			countItems: 8,
+			offset: 0,
+		},
 	});
 	return collections.collections.data.map((collection) => {
 		return {
@@ -19,9 +22,12 @@ export const generateStaticParams = async () => {
 };
 
 export default async function Collection() {
-	const collections = await executeGraphql(CollectionsGetListDocument, {
-		countItems: 8,
-		offset: 0,
+	const collections = await executeGraphql({
+		query: CollectionsGetListDocument,
+		variables: {
+			countItems: 8,
+			offset: 0,
+		},
 	});
 	if (!collections) {
 		throw notFound();

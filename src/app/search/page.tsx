@@ -9,8 +9,11 @@ export default async function SearchByProductsList({
 }: {
 	searchParams: { query: string };
 }) {
-	const { products } = await executeGraphql(ProductsSearchByWordDocument, {
-		searchBy: searchParams.query,
+	const { products } = await executeGraphql({
+		query: ProductsSearchByWordDocument,
+		variables: {
+			searchBy: searchParams.query,
+		},
 	});
 
 	return (

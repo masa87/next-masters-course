@@ -1,5 +1,14 @@
 query ProductGetItemById($productId: ID!) {
 	product(id: $productId) {
 		...ProductItemFragment
+		reviews {
+			id
+			title
+			description
+			rating
+			email
+			author
+			updatedAt
+		}
 	}
 }

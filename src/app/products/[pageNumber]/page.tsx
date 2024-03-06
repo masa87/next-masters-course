@@ -4,15 +4,10 @@ import { ProductList } from "@/app/components/organisms/ProductList";
 import Spinner from "@/app/components/atoms/Spinner";
 import Pagination from "@/app/components/atoms/Pagination";
 import { executeGraphql } from "@/app/api/graphqlApi";
-import { ProductsGetListByCountItemsDocument, ProductsGetListDocument } from "@/gql/graphql";
+import { ProductsGetListByCountItemsDocument } from "@/gql/graphql";
 
 export const generateStaticParams = async () => {
-	const allProducts = await executeGraphql(ProductsGetListDocument);
-	return allProducts.products.data.map((product) => {
-		return {
-			productId: product.id,
-		};
-	});
+	return [{ pagNumber: "1" }, { pageNumber: "2" }, { pageNumber: "3" }];
 };
 
 export default async function ProductPageWithPagination({
@@ -22,9 +17,15 @@ export default async function ProductPageWithPagination({
 }) {
 	const countItems: number = 8;
 	const offset = (parseInt(params.pageNumber) - 1) * 8;
-	const products = await executeGraphql(ProductsGetListByCountItemsDocument, {
-		countItems: countItems,
-		offset: offset,
+	const products = await executeGraphql({
+		query: ProductsGetListByCountItemsDocument,
+		variables: {
+			countItems: countItems,
+			offset: offset,
+		},
+		next: {
+			revalidate: 30,
+		},
 	});
 
 	if (!products.products.data.length) {
