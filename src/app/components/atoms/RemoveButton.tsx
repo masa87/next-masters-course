@@ -9,8 +9,6 @@ const RemoveButton = ({ productId, cartId }: { productId: string; cartId: string
 	const router = useRouter();
 	const [isPending, startTransition] = useTransition();
 
-	console.log(cartId, productId);
-
 	return (
 		<button
 			disabled={isPending}

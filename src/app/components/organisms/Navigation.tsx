@@ -22,13 +22,13 @@ const Navigation = async () => {
 	const cartItemsCount = cartFindOrCreate.items.length || 0;
 
 	return (
-		<nav className="fixed w-full border-gray-200 bg-white shadow-sm dark:bg-gray-900">
+		<nav className="fixed z-50 w-full border-gray-200 bg-white shadow-sm dark:bg-gray-900">
 			<div className="container mx-auto flex flex-wrap items-center justify-between p-4">
 				<div className="flex md:order-2">
 					<SearchInput />
 
 					<Link href={"/cart"}>
-						<div className="ml-4 flex h-9 items-center justify-center gap-1">
+						<div className="ml-4 flex h-9 items-center justify-center gap-1 dark:text-white">
 							<ShoppingCart />
 							<p className="self-start font-semibold text-blue-500">{cartItemsCount}</p>
 						</div>
@@ -75,35 +75,14 @@ const Navigation = async () => {
 						/>
 					</div>
 					<ul className="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 rtl:space-x-reverse dark:border-gray-700 dark:bg-gray-800 md:dark:bg-gray-900">
-						<ActiveLink
-							href={"/"}
-							className="block  px-3 py-2 text-gray-900 hover:bg-gray-100 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
-							activeClassName="border-b-2 border-blue-500"
-						>
-							Home
-						</ActiveLink>
-						<ActiveLink
-							href={"/products"}
-							className="block px-3 py-2 text-gray-900 hover:bg-gray-100 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
-							activeClassName="border-b-2 border-blue-500"
-							exact={false}
-						>
+						<ActiveLink href={"/"}>Home</ActiveLink>
+						<ActiveLink href={"/products"} exact={false}>
 							All
 						</ActiveLink>
-						<ActiveLink
-							href={"/categories"}
-							className="block  px-3 py-2 text-gray-900 hover:bg-gray-100 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
-							activeClassName="border-b-2 border-blue-500"
-							exact={false}
-						>
+						<ActiveLink href={"/categories"} exact={false}>
 							Categories
 						</ActiveLink>
-						<ActiveLink
-							href={"/collections"}
-							className="block  px-3 py-2 text-gray-900 hover:bg-gray-100 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
-							activeClassName="border-b-2 border-blue-500"
-							exact={false}
-						>
+						<ActiveLink href={"/collections"} exact={false}>
 							Collections
 						</ActiveLink>
 					</ul>
