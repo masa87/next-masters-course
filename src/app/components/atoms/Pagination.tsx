@@ -23,7 +23,7 @@ const Pagination = ({
 						<Link
 							href={`/products/${currentPage - 1}`}
 							className="ms-0 flex h-8 items-center justify-center rounded-s-lg border border-e-0 border-gray-300 bg-white px-3 
-            leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 "
 						>
 							Previous
 						</Link>
@@ -35,14 +35,14 @@ const Pagination = ({
 							<Link
 								href={`/products/${1}`}
 								className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500
-             hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+             hover:bg-gray-100 hover:text-gray-700 "
 							>
 								1
 							</Link>
 						</li>
 						<li
 							className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500
-             hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+             hover:bg-gray-100 hover:text-gray-700"
 						>
 							...
 						</li>
@@ -50,7 +50,7 @@ const Pagination = ({
 							<Link
 								href={`/products/${currentPage - 2}`}
 								className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500
-             hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+             hover:bg-gray-100 hover:text-gray-700"
 							>
 								{currentPage - 2}
 							</Link>
@@ -62,7 +62,7 @@ const Pagination = ({
 						<Link
 							href={`/products/${currentPage - 1}`}
 							className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500
-             hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+             hover:bg-gray-100 hover:text-gray-700 "
 						>
 							{currentPage - 1}
 						</Link>
@@ -73,7 +73,7 @@ const Pagination = ({
 						href={`/products/${currentPage}`}
 						aria-current="page"
 						className="flex h-8 items-center justify-center border border-gray-300 bg-blue-50 px-3 text-blue-600 hover:bg-blue-100
-             hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+             hover:text-blue-700 "
 					>
 						{currentPage}
 					</Link>
@@ -85,7 +85,7 @@ const Pagination = ({
 							<Link
 								href={`/products/${currentPage + 1}`}
 								className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 
-            hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            hover:bg-gray-100 hover:text-gray-700 "
 							>
 								{currentPage + 1}
 							</Link>
@@ -95,7 +95,7 @@ const Pagination = ({
 								<Link
 									href={`/products/${currentPage + 2}`}
 									className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 
-            hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            hover:bg-gray-100 hover:text-gray-700 "
 								>
 									{currentPage + 2}
 								</Link>
@@ -105,7 +105,7 @@ const Pagination = ({
 							<Link
 								href={`/products/${currentPage + 1}`}
 								className="flex h-8 items-center justify-center rounded-e-lg border border-gray-300 bg-white px-3 leading-tight
-             text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+             text-gray-500 hover:bg-gray-100 hover:text-gray-700 "
 							>
 								Next
 							</Link>
