@@ -7,7 +7,7 @@ import { type Route } from "next";
 import { usePathname } from "next/navigation";
 
 type ActiveLinkProps = {
-	activeClassName: string;
+	activeClassName?: string;
 	href: Route;
 	children: ReactNode;
 	exact?: boolean;
@@ -25,7 +25,7 @@ export const ActiveLink = ({
 	const isCurrentPath = exact ? pathName === href : pathName.startsWith(href as string);
 
 	return (
-		<>
+		<li>
 			{isCurrentPath ? (
 				<Link
 					href={href}
@@ -42,6 +42,6 @@ export const ActiveLink = ({
 					{children}
 				</Link>
 			)}
-		</>
+		</li>
 	);
 };

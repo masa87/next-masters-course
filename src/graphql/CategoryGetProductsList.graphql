@@ -20,6 +20,15 @@ query CategoryGetProductsList($slug: String!) {
 				width
 			}
 			price
+			reviews {
+				id
+				title
+				description
+				rating
+				email
+				author
+				updatedAt
+			}
 		}
 	}
 }

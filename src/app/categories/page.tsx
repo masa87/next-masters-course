@@ -19,9 +19,12 @@ import { executeGraphql } from "@/app/api/graphqlApi";
 // };
 
 export default async function CategoryProductPage() {
-	const categories = await executeGraphql(CategoriesGetListDocument, {
-		countItems: 8,
-		offset: 0,
+	const categories = await executeGraphql({
+		query: CategoriesGetListDocument,
+		variables: {
+			countItems: 8,
+			offset: 0,
+		},
 	});
 	if (!categories) {
 		throw notFound();

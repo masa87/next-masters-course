@@ -15,7 +15,7 @@ export const ProductItemDescription = ({
 			<div className="flex justify-between">
 				<p className=" text-gray-600 first-letter:capitalize ">{categories[0]?.name}</p>
 
-				<p className="font-bold text-slate-800">{formatPrice(price / 100)}</p>
+				<p className="font-bold text-blue-500">{formatPrice(price / 100)}</p>
 			</div>
 		</div>
 	);

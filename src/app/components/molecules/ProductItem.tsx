@@ -1,4 +1,3 @@
-"use client";
 import React, { Suspense } from "react";
 import Link from "next/link";
 import { ProductItemImage } from "../atoms/ProductItemImage";
