@@ -3,11 +3,22 @@ import Image from "next/image";
 import { XIcon } from "lucide-react";
 import clsx from "clsx";
 import { redirect } from "next/navigation";
+import { type Metadata } from "next";
 import { executeGraphql } from "../api/graphqlApi";
 import Counter from "../components/atoms/Counter";
 import { formatPrice } from "../components/utils";
 import RemoveButton from "../components/atoms/RemoveButton";
+import { handlePaymentAction } from "./actions";
 import { CartFindOrCreateMutationDocument } from "@/gql/graphql";
+
+export async function generateMetadata(): Promise<Metadata> {
+	const cartId = cookies().get("cartId")?.value;
+
+	return {
+		title: "cart",
+		description: `Your cart -> id=${cartId}`,
+	};
+}
 
 export default async function CartPage() {
 	const cartId = cookies().get("cartId")?.value;
@@ -38,17 +49,21 @@ export default async function CartPage() {
 		<div className="mt-6">
 			<div className="flex items-center justify-between">
 				<h2 className="mb-4 text-2xl font-bold">Products:</h2>
-				<div className="text-xl font-semibold">
-					Total:
-					<span className="ml-2 font-bold text-blue-500">{formatPrice(getTotalPrice() / 100)}</span>
-				</div>
+				<form className="mb-5 flex justify-end" action={handlePaymentAction}>
+					<button
+						type="submit"
+						className="rounded-md bg-blue-500 px-4 py-2 font-semibold text-white transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-blue-400"
+					>
+						Pay {formatPrice(getTotalPrice() / 100)}
+					</button>
+				</form>
 			</div>
 
 			<div className="container flex flex-col gap-4">
 				{cartFindOrCreate?.items.map((product) => (
 					<div
 						key={product.product.id}
-						className="flex justify-between rounded-md bg-white px-5 py-2 shadow-md"
+						className="flex flex-col justify-between rounded-md bg-white px-5 py-2 shadow-md sm:flex-row"
 					>
 						<div className="flex">
 							{product.product.images[0] && (
@@ -69,7 +84,7 @@ export default async function CartPage() {
 								</div>
 							</div>
 						</div>
-						<div className="flex items-center justify-between">
+						<div className="flex items-center justify-center sm:justify-between">
 							<RemoveButton productId={product.product.id} cartId={cartId} />
 							<Counter quantity={product.quantity} productId={product.product.id} cartId={cartId} />
 							<XIcon className="mx-2" size={15} />

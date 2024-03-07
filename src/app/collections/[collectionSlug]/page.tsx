@@ -1,9 +1,9 @@
-import { Suspense } from "react";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { ProductList } from "@/app/components/organisms/ProductList";
-import Spinner from "@/app/components/atoms/Spinner";
 import { CollectionGetProductsListDocument } from "@/gql/graphql";
 import { executeGraphql } from "@/app/api/graphqlApi";
+import Spinner from "@/app/components/atoms/Spinner";
 
 export default async function CategoryProductPage({
 	params,
