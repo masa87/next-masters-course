@@ -34,7 +34,7 @@ export default async function CategoryProductPage() {
 
 	return (
 		<section className="container mx-auto">
-			<Suspense fallback={<Spinner className="my-28 h-[50%] w-full" />}>
+			<Suspense fallback={<Spinner className="my-28 h-screen w-full" />}>
 				<ul
 					className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
 					data-testid="products-list"

@@ -1,10 +1,10 @@
-import { Suspense } from "react";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { ProductList } from "@/app/components/organisms/ProductList";
-import Spinner from "@/app/components/atoms/Spinner";
 import Pagination from "@/app/components/atoms/Pagination";
 import { executeGraphql } from "@/app/api/graphqlApi";
 import { ProductsGetListByCountItemsDocument } from "@/gql/graphql";
+import Spinner from "@/app/components/atoms/Spinner";
 
 export const generateStaticParams = async () => {
 	return [{ pagNumber: "1" }, { pageNumber: "2" }, { pageNumber: "3" }];

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
 import { Star } from "lucide-react";
+import { Suspense } from "react";
 import { formatPrice } from "@/app/components/utils";
 import { ProductGetItemByIdDocument, ReviewCreateDocument } from "@/gql/graphql";
 import RelatedProductsList from "@/app/components/organisms/RelatedProductsList";
@@ -12,6 +13,7 @@ import { addToCart, createCart, getCartById } from "@/app/cart/actions";
 import ReviewProductForm from "@/app/components/organisms/ReviewProductForm";
 import CustomButton from "@/app/components/atoms/CustomButton";
 import ReviewList from "@/app/components/organisms/ReviewList";
+import Spinner from "@/app/components/atoms/Spinner";
 
 export async function generateMetadata({
 	params,
@@ -110,9 +112,9 @@ export default async function ProductPage({
 		<>
 			<form
 				action={addProductToCartAction}
-				className="container mx-auto my-8 rounded-md bg-white p-8 shadow-lg"
+				className="container mx-auto my-8 rounded-md bg-white p-8 shadow-lg lg:min-h-[500px]"
 			>
-				<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+				<div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
 					<div className="flex justify-center md:col-span-1 lg:col-span-2">
 						{product.images[0] && (
 							<Image
@@ -153,7 +155,9 @@ export default async function ProductPage({
 					<CustomButton title="Submit" />
 				</div>
 			</form>
-			<ReviewList reviews={product.reviews} />
+			<Suspense fallback={<Spinner />}>
+				{product.reviews && <ReviewList reviews={product.reviews} />}
+			</Suspense>
 		</>
 	);
 }
@@ -161,7 +165,7 @@ async function getOrCreateCart() {
 	const cartId = cookies().get("cartId")?.value;
 
 	if (cartId) {
-		return getCartById(cartId);
+		return getCartById();
 	} else {
 		return createCart();
 	}

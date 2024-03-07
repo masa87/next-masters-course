@@ -307,6 +307,14 @@ export type CartRemoveItemMutationVariables = Exact<{
 
 export type CartRemoveItemMutation = { cartRemoveItem: { id: string, items: Array<{ quantity: number, product: { id: string, name: string, description: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> } }> } };
 
+export type CartStatusChangeMutationVariables = Exact<{
+  cartId: Scalars['ID']['input'];
+  userEmail: Scalars['String']['input'];
+}>;
+
+
+export type CartStatusChangeMutation = { cartComplete: { id: string, totalAmount: number, lines: unknown, status: OrderStatus } };
+
 export type CategoriesGetListQueryVariables = Exact<{
   countItems: Scalars['Int']['input'];
   offset: Scalars['Int']['input'];
@@ -498,6 +506,16 @@ export const CartRemoveItemDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<CartRemoveItemMutation, CartRemoveItemMutationVariables>;
+export const CartStatusChangeDocument = new TypedDocumentString(`
+    mutation CartStatusChange($cartId: ID!, $userEmail: String!) {
+  cartComplete(cartId: $cartId, userEmail: $userEmail) {
+    id
+    totalAmount
+    lines
+    status
+  }
+}
+    `) as unknown as TypedDocumentString<CartStatusChangeMutation, CartStatusChangeMutationVariables>;
 export const CategoriesGetListDocument = new TypedDocumentString(`
     query CategoriesGetList($countItems: Int!, $offset: Int!) {
   categories(take: $countItems, skip: $offset) {

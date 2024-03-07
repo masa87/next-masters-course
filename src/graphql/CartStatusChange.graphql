@@ -1,0 +1,8 @@
+mutation CartStatusChange($cartId: ID!, $userEmail: String!) {
+	cartComplete(cartId: $cartId, userEmail: $userEmail) {
+		id
+		totalAmount
+		lines
+		status
+	}
+}
