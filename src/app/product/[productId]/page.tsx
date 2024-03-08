@@ -59,10 +59,6 @@ export default async function ProductPage({
 		throw notFound();
 	}
 
-	if (!product.categories[0]) {
-		throw notFound();
-	}
-
 	async function addProductToCartAction() {
 		"use server";
 		const cart = await getOrCreateCart();
