@@ -11,7 +11,7 @@ const MobileMenu = () => {
 	return (
 		<>
 			<Menu
-				className="relative md:hidden dark:text-white"
+				className="relative md:hidden"
 				size={30}
 				onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
 			/>
@@ -21,7 +21,7 @@ const MobileMenu = () => {
 					className={clsx(
 						isMobileMenuOpen && "right-0",
 						!isMobileMenuOpen && "right-[-50px]",
-						`absolute top-[54px] mt-4 flex flex-col rounded-bl-lg border border-gray-100 bg-white p-4 font-medium shadow-md md:hidden rtl:space-x-reverse dark:border-gray-900 dark:bg-gray-900`,
+						`absolute top-[54px] mt-4 flex flex-col rounded-bl-lg border border-gray-100 bg-white p-4 font-medium shadow-md md:hidden rtl:space-x-reverse`,
 					)}
 				>
 					<div onClick={() => setIsMobileMenuOpen(false)}>

@@ -49,6 +49,7 @@ export default async function ProductPageWithPagination({
 				countItems={products.products.meta.count}
 				itemsPerPage={countItems}
 				totalItemsCount={products.products.meta.total}
+				baseUrl={"/products"}
 			/>
 		</section>
 	);
