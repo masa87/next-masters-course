@@ -5,6 +5,7 @@ interface PaginationProps {
 	countItems: number;
 	itemsPerPage: number;
 	totalItemsCount: number;
+	baseUrl: string;
 }
 
 const Pagination = ({
@@ -12,6 +13,7 @@ const Pagination = ({
 	countItems,
 	itemsPerPage,
 	totalItemsCount,
+	baseUrl,
 }: PaginationProps) => {
 	const isNextpageAvailable = countItems >= itemsPerPage;
 
@@ -21,7 +23,7 @@ const Pagination = ({
 				{currentPage > 1 && (
 					<li>
 						<Link
-							href={`/products/${currentPage - 1}`}
+							href={`${baseUrl}/${currentPage - 1}`}
 							className="ms-0 flex h-8 items-center justify-center rounded-s-lg border border-e-0 border-gray-300 bg-white px-3 
             leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 "
 						>
@@ -33,7 +35,7 @@ const Pagination = ({
 					<>
 						<li>
 							<Link
-								href={`/products/${1}`}
+								href={`${baseUrl}/${1}`}
 								className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500
              hover:bg-gray-100 hover:text-gray-700 "
 							>
@@ -48,7 +50,7 @@ const Pagination = ({
 						</li>
 						<li>
 							<Link
-								href={`/products/${currentPage - 2}`}
+								href={`${baseUrl}/${currentPage - 2}`}
 								className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500
              hover:bg-gray-100 hover:text-gray-700"
 							>
@@ -60,7 +62,7 @@ const Pagination = ({
 				{currentPage > 1 && (
 					<li>
 						<Link
-							href={`/products/${currentPage - 1}`}
+							href={`${baseUrl}/${currentPage - 1}`}
 							className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500
              hover:bg-gray-100 hover:text-gray-700 "
 						>
@@ -70,7 +72,7 @@ const Pagination = ({
 				)}
 				<li>
 					<Link
-						href={`/products/${currentPage}`}
+						href={`${baseUrl}/${currentPage}`}
 						aria-current="page"
 						className="flex h-8 items-center justify-center border border-gray-300 bg-blue-50 px-3 text-blue-600 hover:bg-blue-100
              hover:text-blue-700 "
@@ -83,7 +85,7 @@ const Pagination = ({
 						{" "}
 						<li>
 							<Link
-								href={`/products/${currentPage + 1}`}
+								href={`${baseUrl}/${currentPage + 1}`}
 								className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 
             hover:bg-gray-100 hover:text-gray-700 "
 							>
@@ -93,7 +95,7 @@ const Pagination = ({
 						{(currentPage + 2) * itemsPerPage <= totalItemsCount && (
 							<li>
 								<Link
-									href={`/products/${currentPage + 2}`}
+									href={`${baseUrl}/${currentPage + 2}`}
 									className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 
             hover:bg-gray-100 hover:text-gray-700 "
 								>
@@ -103,7 +105,7 @@ const Pagination = ({
 						)}
 						<li>
 							<Link
-								href={`/products/${currentPage + 1}`}
+								href={`${baseUrl}/${currentPage + 1}`}
 								className="flex h-8 items-center justify-center rounded-e-lg border border-gray-300 bg-white px-3 leading-tight
              text-gray-500 hover:bg-gray-100 hover:text-gray-700 "
 							>

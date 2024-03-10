@@ -23,9 +23,9 @@ export const ActiveLink = ({ className, href, children, exact = true }: ActiveLi
 				<Link
 					href={href}
 					className={clsx(
-						"block px-3  py-2 text-gray-900 transition-all hover:bg-gray-100 md:p-0 md:hover:bg-transparent md:hover:text-blue-700  dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent md:dark:hover:text-blue-500",
+						"block px-3  py-2 text-gray-900 transition-all hover:bg-gray-100 md:p-0 md:hover:bg-transparent md:hover:text-blue-700",
 						`${className}`,
-						isCurrentPath && `border-b-2 border-blue-500`,
+						isCurrentPath && `border-b-2 border-b-blue-500`,
 					)}
 					aria-current={isCurrentPath}
 				>
@@ -35,9 +35,8 @@ export const ActiveLink = ({ className, href, children, exact = true }: ActiveLi
 				<Link
 					href={href}
 					className={clsx(
-						"block px-3  py-2 text-gray-900 transition-all hover:bg-gray-100 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent md:dark:hover:text-blue-500",
+						"block px-3  py-2 text-gray-900 transition-all hover:bg-gray-100 md:p-0 md:hover:bg-transparent md:hover:text-blue-700",
 						`${className}`,
-						isCurrentPath && `border-b-2 border-blue-500`,
 					)}
 				>
 					{children}

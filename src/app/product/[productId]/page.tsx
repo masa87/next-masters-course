@@ -9,7 +9,7 @@ import { formatPrice } from "@/app/components/utils";
 import { ProductGetItemByIdDocument, ReviewCreateDocument } from "@/gql/graphql";
 import RelatedProductsList from "@/app/components/organisms/RelatedProductsList";
 import { executeGraphql } from "@/app/api/graphqlApi";
-import { addToCart, createCart, getCartById } from "@/app/cart/actions";
+import { addToCart, changeItemQuantity, createCart, getCartById } from "@/app/cart/actions";
 import ReviewProductForm from "@/app/components/organisms/ReviewProductForm";
 import CustomButton from "@/app/components/atoms/CustomButton";
 import ReviewList from "@/app/components/organisms/ReviewList";
@@ -68,7 +68,19 @@ export default async function ProductPage({
 		}
 		cookies().set("cartId", cart.cartFindOrCreate.id);
 
-		await addToCart(cart.cartFindOrCreate.id, params.productId);
+		const itemFromCart = cart.cartFindOrCreate.items.filter(
+			(item) => item.product.id === params.productId,
+		);
+
+		if (itemFromCart && itemFromCart.length > 0) {
+			await changeItemQuantity(
+				cart.cartFindOrCreate.id,
+				params.productId,
+				Number(itemFromCart[0]?.quantity) + 1,
+			);
+		} else {
+			await addToCart(cart.cartFindOrCreate.id, params.productId);
+		}
 
 		revalidateTag("cart");
 	}
@@ -133,7 +145,7 @@ export default async function ProductPage({
 							<p className="ml-2 italic">{product.rating?.toFixed()}/5</p>
 						</div>
 						<p className="mb-4 font-bold text-blue-500">{formatPrice(product.price / 100)}</p>
-						<CustomButton title="Add to cart" />
+						<CustomButton title="Add to cart" dataTestId="add-to-cart-button" />
 					</div>
 				</div>
 			</form>
@@ -148,7 +160,7 @@ export default async function ProductPage({
 				<h3 className="text-center text-xl font-semibold">Your review</h3>
 				<ReviewProductForm />
 				<div className="mx-auto mt-3">
-					<CustomButton title="Submit" />
+					<CustomButton title="Submit" dataTestId="add-review" />
 				</div>
 			</form>
 			<Suspense fallback={<Spinner />}>

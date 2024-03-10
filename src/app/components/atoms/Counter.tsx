@@ -32,7 +32,10 @@ const Counter = ({ quantity, productId, cartId }: CounterProps) => {
 			>
 				<ChevronUp />
 			</button>
-			<p className="w-full cursor-default rounded-md border-b-gray-100 bg-slate-200 text-center">
+			<p
+				className="w-full cursor-default rounded-md border-b-gray-100 bg-slate-200 text-center"
+				data-testid="quantity"
+			>
 				{optimisticQuantity}
 			</p>
 
@@ -46,7 +49,7 @@ const Counter = ({ quantity, productId, cartId }: CounterProps) => {
 					await changeItemQuantity(cartId, productId, optimisticQuantity - 1);
 				}}
 			>
-				<span data-testid="quantity">{optimisticQuantity > 1 && <ChevronDown />}</span>
+				<span>{optimisticQuantity > 1 && <ChevronDown />}</span>
 			</button>
 		</form>
 	);

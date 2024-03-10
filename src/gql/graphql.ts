@@ -345,6 +345,17 @@ export type CollectionsGetListQueryVariables = Exact<{
 
 export type CollectionsGetListQuery = { collections: { data: Array<{ id: string, name: string, description: string, slug: string, products: Array<{ images: Array<{ url: string }> }> }>, meta: { count: number, total: number } } };
 
+export type OrdersGetByEmailQueryVariables = Exact<{
+  email: Scalars['String']['input'];
+  order?: SortDirection;
+  orderBy?: OrderSortBy;
+  skip?: Scalars['Int']['input'];
+  take?: Scalars['Int']['input'];
+}>;
+
+
+export type OrdersGetByEmailQuery = { orders: { data: Array<{ id: string, status: OrderStatus, totalAmount: number, createdAt: unknown, lines: unknown }>, meta: { total: number, count: number } } };
+
 export type ProductGetItemByIdQueryVariables = Exact<{
   productId: Scalars['ID']['input'];
 }>;
@@ -621,6 +632,29 @@ export const CollectionsGetListDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<CollectionsGetListQuery, CollectionsGetListQueryVariables>;
+export const OrdersGetByEmailDocument = new TypedDocumentString(`
+    query OrdersGetByEmail($email: String!, $order: SortDirection! = ASC, $orderBy: OrderSortBy! = DEFAULT, $skip: Int! = 0, $take: Int! = 10) {
+  orders(
+    email: $email
+    order: $order
+    orderBy: $orderBy
+    skip: $skip
+    take: $take
+  ) {
+    data {
+      id
+      status
+      totalAmount
+      createdAt
+      lines
+    }
+    meta {
+      total
+      count
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<OrdersGetByEmailQuery, OrdersGetByEmailQueryVariables>;
 export const ProductGetItemByIdDocument = new TypedDocumentString(`
     query ProductGetItemById($productId: ID!) {
   product(id: $productId) {
