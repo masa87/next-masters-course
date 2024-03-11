@@ -15,12 +15,12 @@ export const ProductList = async ({ products }: ProductListType) => {
 
 	return (
 		<>
-			{products.map((product) => (
+			{products.map((product, index) => (
 				<li
 					key={product.id}
 					className="cursor-pointer overflow-hidden rounded-lg bg-white shadow-md transition-all hover:scale-105"
 				>
-					<ProductItem product={product} />
+					<ProductItem product={product} priority={index <= 2 && true} />
 				</li>
 			))}
 		</>
