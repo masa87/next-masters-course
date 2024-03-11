@@ -144,7 +144,7 @@ export default async function ProductPage({
 							))}
 							<p className="ml-2 italic">{product.rating?.toFixed()}/5</p>
 						</div>
-						<p className="mb-4 font-bold text-blue-500">{formatPrice(product.price / 100)}</p>
+						<p className="mb-4 font-bold text-blue-600">{formatPrice(product.price / 100)}</p>
 						<CustomButton title="Add to cart" dataTestId="add-to-cart-button" />
 					</div>
 				</div>

@@ -33,7 +33,7 @@ const Navigation = async () => {
 						<Link href={"/cart"}>
 							<div className="ml-4 flex h-9 items-center justify-center gap-1">
 								<ShoppingCart />
-								<p className="self-start font-semibold text-blue-500">{cartItemsCount}</p>
+								<p className="self-start font-semibold text-blue-600">{cartItemsCount}</p>
 							</div>
 						</Link>
 						<div>
@@ -45,7 +45,7 @@ const Navigation = async () => {
 
 						<div className="hidden md:flex">
 							<SignedOut>
-								<div className="rounded-md bg-blue-500 px-4 py-2 font-semibold text-white transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-blue-400">
+								<div className="rounded-md bg-blue-600 px-4 py-2 font-semibold text-white transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-blue-400">
 									<SignInButton />
 								</div>
 							</SignedOut>

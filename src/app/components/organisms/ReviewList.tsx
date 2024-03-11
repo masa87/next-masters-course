@@ -35,7 +35,7 @@ const ReviewList = ({ reviews }: ReviewListProps) => {
 			{sortedByReviewDate.map((review) => (
 				<div key={review.id} className="rounded-md bg-white p-6 shadow-md">
 					<div className="mb-4 flex items-center">
-						<p className="text-lg font-semibold">{review.author}</p>
+						<p className="text-lg font-semibold">Author: {review.author}</p>
 						<div className="ml-auto flex items-center space-x-2">
 							<p className="text-gray-600">{review.rating}/5</p>
 							<div className="flex">

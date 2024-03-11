@@ -25,7 +25,7 @@ export const ActiveLink = ({ className, href, children, exact = true }: ActiveLi
 					className={clsx(
 						"block px-3  py-2 text-gray-900 transition-all hover:bg-gray-100 md:p-0 md:hover:bg-transparent md:hover:text-blue-700",
 						`${className}`,
-						isCurrentPath && `border-b-2 border-b-blue-500`,
+						isCurrentPath && `border-b-2 border-b-blue-600`,
 					)}
 					aria-current={isCurrentPath}
 				>

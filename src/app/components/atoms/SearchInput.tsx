@@ -30,8 +30,8 @@ const SearchInput = () => {
 					aria-label="search"
 					role="searchbox"
 					onKeyUp={handleSearch}
-					className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 ps-10 text-sm text-gray-900 focus:border-blue-500
-           focus:ring-blue-500 focus-visible:border-blue-500"
+					className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 ps-10 text-sm text-gray-900 focus:border-blue-600
+           focus:ring-blue-600 focus-visible:border-blue-600"
 					placeholder="Search..."
 				/>
 			</div>
