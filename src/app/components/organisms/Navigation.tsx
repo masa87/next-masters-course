@@ -6,7 +6,6 @@ import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { ActiveLink } from "../atoms/ActiveLink";
 import SearchInput from "../atoms/SearchInput";
 import MobileMenu from "../molecules/MobileMenu";
-import CustomButton from "../atoms/CustomButton";
 import { executeGraphql } from "@/app/api/graphqlApi";
 import { CartFindOrCreateMutationDocument } from "@/gql/graphql";
 
@@ -37,17 +36,19 @@ const Navigation = async () => {
 								<p className="self-start font-semibold text-blue-500">{cartItemsCount}</p>
 							</div>
 						</Link>
-						<MobileMenu />
-
-						<SignedOut>
-							<CustomButton>
-								<SignInButton />
-							</CustomButton>
-						</SignedOut>
 						<div>
 							<SignedIn>
 								<UserButton />
 							</SignedIn>
+						</div>
+						<MobileMenu />
+
+						<div className="hidden md:flex">
+							<SignedOut>
+								<div className="rounded-md bg-blue-500 px-4 py-2 font-semibold text-white transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-blue-400">
+									<SignInButton />
+								</div>
+							</SignedOut>
 						</div>
 					</div>
 				</div>
@@ -57,11 +58,11 @@ const Navigation = async () => {
 						<ActiveLink href={"/products"} exact={false}>
 							All
 						</ActiveLink>
-						<ActiveLink href={"/categories"} exact={false}>
-							Categories
-						</ActiveLink>
 						<ActiveLink href={"/collections"} exact={false}>
 							Collections
+						</ActiveLink>
+						<ActiveLink href={"/categories"} exact={false}>
+							Categories
 						</ActiveLink>
 					</ul>
 				</div>
