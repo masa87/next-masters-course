@@ -131,6 +131,7 @@ export default async function ProductPage({
 								className="max-h-[100vh] w-auto"
 								width={300}
 								height={700}
+								priority
 							/>
 						)}
 					</div>

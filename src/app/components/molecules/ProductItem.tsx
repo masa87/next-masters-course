@@ -6,13 +6,16 @@ import { type ProductItemFragmentFragment } from "@/gql/graphql";
 
 type ProductItemProps = {
 	product: ProductItemFragmentFragment;
+	priority?: boolean;
 };
 
-const ProductItem = ({ product }: ProductItemProps) => {
+const ProductItem = ({ product, priority }: ProductItemProps) => {
 	return (
 		<Link href={`/product/${product.id}`}>
 			<article>
-				{product.images[0] && <ProductItemImage url={product.images[0].url} alt={product.name} />}
+				{product.images[0] && (
+					<ProductItemImage url={product.images[0].url} alt={product.name} priority={priority} />
+				)}
 				<ProductItemDescription product={product} />
 			</article>
 		</Link>
