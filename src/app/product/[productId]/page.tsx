@@ -34,10 +34,10 @@ export async function generateMetadata({
 }
 
 type formReviewType = {
-	title: string;
-	description: string;
+	headline: string;
+	content: string;
 	rating: number;
-	author: string;
+	name: string;
 	email: string;
 };
 
@@ -91,12 +91,12 @@ export default async function ProductPage({
 		const reviewData = Object.fromEntries(FormData) as unknown as formReviewType;
 
 		const newReview = {
-			author: reviewData.author,
-			description: reviewData.description,
+			author: reviewData.name,
+			description: reviewData.content,
 			email: reviewData.email,
 			productId: params.productId,
 			rating: Number(reviewData.rating),
-			title: reviewData.title,
+			title: reviewData.headline,
 		};
 
 		const review = await executeGraphql({
