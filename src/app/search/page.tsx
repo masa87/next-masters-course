@@ -15,13 +15,19 @@ export default async function SearchByProductsList({
 	});
 
 	return (
-		<section className="container mx-auto">
-			<ul
-				className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
-				data-testid="products-list"
-			>
-				<ProductList products={products.data} />
-			</ul>
-		</section>
+		<>
+			{!products.data || products.data.length === 0 ? (
+				<h1 className="mt-5 text-center text-2xl font-semibold">No products found</h1>
+			) : (
+				<section className="container mx-auto">
+					<ul
+						className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
+						data-testid="products-list"
+					>
+						<ProductList products={products.data} />
+					</ul>
+				</section>
+			)}
+		</>
 	);
 }
