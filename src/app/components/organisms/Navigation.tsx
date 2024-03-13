@@ -7,7 +7,7 @@ import { ActiveLink } from "../atoms/ActiveLink";
 import SearchInput from "../atoms/SearchInput";
 import MobileMenu from "../molecules/MobileMenu";
 import { executeGraphql } from "@/app/api/graphqlApi";
-import { CartFindOrCreateMutationDocument } from "@/gql/graphql";
+import { CartFindOrCreateMutationDocument, CategoriesGetListDocument } from "@/gql/graphql";
 
 const Navigation = async () => {
 	const cartId = cookies().get("cartId")?.value;
@@ -18,6 +18,14 @@ const Navigation = async () => {
 		},
 		next: {
 			tags: ["cart"],
+		},
+	});
+
+	const { categories } = await executeGraphql({
+		query: CategoriesGetListDocument,
+		variables: {
+			countItems: 8,
+			offset: 0,
 		},
 	});
 
@@ -58,12 +66,11 @@ const Navigation = async () => {
 						<ActiveLink href={"/products"} exact={false}>
 							All
 						</ActiveLink>
-						<ActiveLink href={"/collections"} exact={false}>
-							Collections
-						</ActiveLink>
-						<ActiveLink href={"/categories"} exact={false}>
-							Categories
-						</ActiveLink>
+						{categories.data.map((category) => (
+							<ActiveLink exact={false} key={category.id} href={`/categories/${category.slug}/1`}>
+								{category.name}
+							</ActiveLink>
+						))}
 					</ul>
 				</div>
 			</div>

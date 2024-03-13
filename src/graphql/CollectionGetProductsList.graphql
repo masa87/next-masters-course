@@ -12,6 +12,7 @@ query CollectionGetProductsList($slug: String!) {
 			collections {
 				name
 				slug
+				description
 			}
 			images {
 				url
