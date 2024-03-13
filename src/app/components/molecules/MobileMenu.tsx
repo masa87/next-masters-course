@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Menu } from "lucide-react";
 import clsx from "clsx";
 import { SignInButton, SignedOut } from "@clerk/nextjs";
+import Image from "next/image";
 import { ActiveLink } from "../atoms/ActiveLink";
 
 const MobileMenu = () => {
@@ -15,9 +15,12 @@ const MobileMenu = () => {
 
 	return (
 		<>
-			<Menu
+			<Image
 				className="relative md:hidden"
-				size={30}
+				src="/icons/hamburger-menu.svg"
+				alt={"cart"}
+				width={30}
+				height={30}
 				onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
 			/>
 

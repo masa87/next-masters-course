@@ -1,7 +1,7 @@
 "use client";
 
-import { Search } from "lucide-react";
 import React from "react";
+import Image from "next/image";
 
 const SearchInput = () => {
 	let searchTimeout: NodeJS.Timeout;
@@ -21,7 +21,13 @@ const SearchInput = () => {
 		<>
 			<div className="relative md:block">
 				<div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3">
-					<Search size={20} className="text-gray-500" />
+					<Image
+						src={"/icons/search.svg"}
+						alt={"search"}
+						width={20}
+						height={20}
+						className="text-gray-500"
+					/>
 
 					<span className="sr-only">Search icon</span>
 				</div>

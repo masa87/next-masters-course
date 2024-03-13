@@ -1,5 +1,5 @@
 import React from "react";
-import { Star } from "lucide-react";
+import Image from "next/image";
 
 type ReviewListProps = {
 	reviews: {
@@ -40,7 +40,7 @@ const ReviewList = ({ reviews }: ReviewListProps) => {
 							<p className="text-gray-600">{review.rating}/5</p>
 							<div className="flex">
 								{Array.from({ length: review.rating }, (_, index) => (
-									<Star key={index} className="h-5 w-5 fill-current text-yellow-500" />
+									<Image key={index} src={"/icons/star.svg"} alt="x-icon" width={20} height={20} />
 								))}
 							</div>
 						</div>

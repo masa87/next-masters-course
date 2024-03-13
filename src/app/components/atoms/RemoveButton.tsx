@@ -1,8 +1,8 @@
 "use client";
 
-import { Trash2 } from "lucide-react";
 import React, { useTransition } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { removeItem } from "@/app/cart/actions";
 
 const RemoveButton = ({ productId, cartId }: { productId: string; cartId: string }) => {
@@ -18,9 +18,9 @@ const RemoveButton = ({ productId, cartId }: { productId: string; cartId: string
 					router.refresh();
 				});
 			}}
-			className="mr-2 cursor-pointer text-red-600"
+			className="mr-2 cursor-pointer text-red-600 disabled:cursor-not-allowed disabled:text-slate-500"
 		>
-			<Trash2 size={20} />
+			<Image className="mx-2" src={"/icons/remove-icon.svg"} alt="x-icon" width={20} height={20} />
 		</button>
 	);
 };

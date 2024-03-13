@@ -1,8 +1,8 @@
 "use client";
 
-import { ChevronDown, ChevronUp } from "lucide-react";
 import React, { useOptimistic } from "react";
 import { useFormStatus } from "react-dom";
+import Image from "next/image";
 import { changeItemQuantity } from "@/app/cart/actions";
 
 type CounterProps = {
@@ -30,7 +30,7 @@ const Counter = ({ quantity, productId, cartId }: CounterProps) => {
 					await changeItemQuantity(cartId, productId, optimisticQuantity + 1);
 				}}
 			>
-				<ChevronUp />
+				<Image src={"/icons/chevron-up.svg"} alt="x-icon" width={24} height={24} />
 			</button>
 			<p
 				className="w-full cursor-default rounded-md border-b-gray-100 bg-slate-200 text-center"
@@ -49,7 +49,17 @@ const Counter = ({ quantity, productId, cartId }: CounterProps) => {
 					await changeItemQuantity(cartId, productId, optimisticQuantity - 1);
 				}}
 			>
-				<span>{optimisticQuantity > 1 && <ChevronDown />}</span>
+				<span>
+					{optimisticQuantity > 1 && (
+						<Image
+							src={"/icons/chevron-up.svg"}
+							alt="x-icon"
+							width={24}
+							height={24}
+							className="rotate-180"
+						/>
+					)}
+				</span>
 			</button>
 		</form>
 	);

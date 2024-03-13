@@ -1,9 +1,9 @@
 import { cookies } from "next/headers";
 import Image from "next/image";
-import { XIcon } from "lucide-react";
 import clsx from "clsx";
 import { redirect } from "next/navigation";
 import { type Metadata } from "next";
+import Link from "next/link";
 import { executeGraphql } from "../api/graphqlApi";
 import Counter from "../components/atoms/Counter";
 import { formatPrice } from "../components/utils";
@@ -67,13 +67,15 @@ export default async function CartPage() {
 					>
 						<div className="flex">
 							{product.product.images[0] && (
-								<Image
-									width={100}
-									height={100}
-									src={product.product.images[0].url}
-									alt={product.product.name}
-									className="h-30 rounded-md object-contain"
-								/>
+								<Link href={`/product/${product.product.id}`}>
+									<Image
+										width={100}
+										height={100}
+										src={product.product.images[0].url}
+										alt={product.product.name}
+										className="h-30 rounded-md object-contain"
+									/>
+								</Link>
 							)}
 							<div className="mb-2 ml-5 flex items-center justify-between">
 								<div>
@@ -87,7 +89,13 @@ export default async function CartPage() {
 						<div className="flex items-center justify-center sm:justify-between">
 							<RemoveButton productId={product.product.id} cartId={cartId} />
 							<Counter quantity={product.quantity} productId={product.product.id} cartId={cartId} />
-							<XIcon className="mx-2" size={15} />
+							<Image
+								className="mx-2"
+								src={"/icons/x-icon.svg"}
+								alt="x-icon"
+								width={15}
+								height={15}
+							/>
 							<div className={clsx(`self-center`, product.quantity > 1 && "mt-[33px]")}>
 								<p className="font-semibold">{formatPrice(product.product.price / 100)}</p>
 								{product.quantity > 1 && (

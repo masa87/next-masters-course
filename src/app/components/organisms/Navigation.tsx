@@ -1,11 +1,11 @@
 import React from "react";
-import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import Image from "next/image";
 import { ActiveLink } from "../atoms/ActiveLink";
-import SearchInput from "../atoms/SearchInput";
 import MobileMenu from "../molecules/MobileMenu";
+import SearchInput from "../atoms/SearchInput";
 import { executeGraphql } from "@/app/api/graphqlApi";
 import { CartFindOrCreateMutationDocument, CategoriesGetListDocument } from "@/gql/graphql";
 
@@ -36,11 +36,10 @@ const Navigation = async () => {
 			<div className="container mx-auto flex flex-wrap items-center justify-between p-4">
 				<div className="flex w-full items-center justify-between md:order-2 md:w-auto">
 					<SearchInput />
-
 					<div className="flex items-center gap-3">
 						<Link href={"/cart"}>
 							<div className="ml-4 flex h-9 items-center justify-center gap-1">
-								<ShoppingCart />
+								<Image src="/icons/cart.svg" alt={"cart"} width={24} height={24} />
 								<p className="self-start font-semibold text-blue-600">{cartItemsCount}</p>
 							</div>
 						</Link>
@@ -50,7 +49,6 @@ const Navigation = async () => {
 							</SignedIn>
 						</div>
 						<MobileMenu />
-
 						<div className="hidden md:flex">
 							<SignedOut>
 								<div className="rounded-md bg-blue-600 px-4 py-2 font-semibold text-white transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-blue-400">
