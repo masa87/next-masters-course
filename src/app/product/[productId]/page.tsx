@@ -3,7 +3,6 @@ import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
-import { Star } from "lucide-react";
 import { Suspense } from "react";
 import { formatPrice } from "@/app/components/utils";
 import { ProductGetItemByIdDocument, ReviewCreateDocument } from "@/gql/graphql";
@@ -117,7 +116,7 @@ export default async function ProductPage({
 	const reviewNumber = Number(product.rating?.toFixed());
 
 	return (
-		<>
+		<Suspense fallback={<Spinner />}>
 			<form
 				action={addProductToCartAction}
 				className="container mx-auto my-8 rounded-md bg-white p-8 shadow-lg lg:min-h-[500px]"
@@ -141,7 +140,7 @@ export default async function ProductPage({
 						<p className="mb-4 text-gray-600">{product.description}</p>
 						<div className="mb-4 flex text-gray-600">
 							{Array.from({ length: reviewNumber }, (_, i) => i + 1).map((i, j) => (
-								<Star key={j} className="h-5 w-5 fill-current text-yellow-500" />
+								<Image key={j} src={"/icons/star.svg"} alt="x-icon" width={20} height={20} />
 							))}
 							<p className="ml-2 italic">{product.rating?.toFixed()}/5</p>
 						</div>
@@ -167,7 +166,7 @@ export default async function ProductPage({
 			<Suspense fallback={<Spinner />}>
 				{product.reviews && <ReviewList reviews={product.reviews} />}
 			</Suspense>
-		</>
+		</Suspense>
 	);
 }
 async function getOrCreateCart() {

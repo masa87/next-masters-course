@@ -1,6 +1,6 @@
-import { CheckCircle } from "lucide-react";
 import { redirect } from "next/navigation";
 import Stripe from "stripe";
+import Image from "next/image";
 
 export default async function CartSuccess({
 	searchParams,
@@ -25,7 +25,15 @@ export default async function CartSuccess({
 	return (
 		<div className="container mx-auto my-8 flex justify-center">
 			<div className="flex max-w-96 flex-col items-center gap-5 rounded-md bg-white p-8 shadow-md">
-				{stripeCheckoutSession.payment_status === "paid" && <CheckCircle color="green" size={40} />}
+				{stripeCheckoutSession.payment_status === "paid" && (
+					<Image
+						src={"/icons/chevron-up.svg"}
+						alt="x-icon"
+						width={40}
+						height={40}
+						className="rotate-180"
+					/>
+				)}
 				<h2 className="mb-4 text-2xl font-bold">
 					Payment status: {stripeCheckoutSession.payment_status}
 				</h2>
