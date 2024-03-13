@@ -1,5 +1,6 @@
 query CategoryGetProductsList($slug: String!) {
 	category(slug: $slug) {
+		name
 		products {
 			id
 			name

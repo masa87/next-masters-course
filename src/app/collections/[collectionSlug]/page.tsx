@@ -1,33 +1,49 @@
 import { notFound } from "next/navigation";
-import { ProductList } from "@/app/components/organisms/ProductList";
 import { CollectionGetProductsListDocument } from "@/gql/graphql";
 import { executeGraphql } from "@/app/api/graphqlApi";
+import { CollectionList } from "@/app/components/organisms/CollectionList";
 
-export default async function CategoryProductPage({
-	params,
-}: {
-	params: { collectionSlug: string };
-}) {
-	const collection = await executeGraphql({
+export async function generateMetadata({ params }: { params: { collectionSlug: string } }) {
+	const { collection } = await executeGraphql({
 		query: CollectionGetProductsListDocument,
 		variables: {
 			slug: params.collectionSlug,
 		},
 	});
 
-	if (!collection.collection?.products) {
+	return {
+		title: collection?.products[0]?.collections[0]?.name,
+		description: collection?.products[0]?.collections[0]?.description,
+	};
+}
+
+export default async function CategoryProductPage({
+	params,
+}: {
+	params: { collectionSlug: string };
+}) {
+	const { collection } = await executeGraphql({
+		query: CollectionGetProductsListDocument,
+		variables: {
+			slug: params.collectionSlug,
+		},
+	});
+
+	if (!collection?.products) {
 		throw notFound();
 	}
 
-	const productsToRender = collection.collection.products;
-
 	return (
 		<section className="container mx-auto">
+			<h1 className="my-6 text-2xl font-semibold">
+				{collection.products[0]?.collections[0]?.name}
+			</h1>
+
 			<ul
 				className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
 				data-testid="products-list"
 			>
-				<ProductList products={productsToRender} />
+				<CollectionList products={collection.products} />
 			</ul>
 		</section>
 	);

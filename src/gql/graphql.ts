@@ -328,14 +328,16 @@ export type CategoryGetProductsListQueryVariables = Exact<{
 }>;
 
 
-export type CategoryGetProductsListQuery = { category?: { products: Array<{ id: string, name: string, description: string, slug: string, price: number, categories: Array<{ name: string, slug: string }>, collections: Array<{ name: string, slug: string }>, images: Array<{ url: string, alt: string, height: number, width: number }>, reviews: Array<{ id: string, title: string, description: string, rating: number, email: string, author: string, updatedAt: unknown }> }> } | null };
+export type CategoryGetProductsListQuery = { category?: { name: string, products: Array<{ id: string, name: string, description: string, slug: string, price: number, categories: Array<{ name: string, slug: string }>, collections: Array<{ name: string, slug: string }>, images: Array<{ url: string, alt: string, height: number, width: number }>, reviews: Array<{ id: string, title: string, description: string, rating: number, email: string, author: string, updatedAt: unknown }> }> } | null };
 
 export type CollectionGetProductsListQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
 
 
-export type CollectionGetProductsListQuery = { collection?: { products: Array<{ id: string, name: string, description: string, slug: string, price: number, categories: Array<{ name: string, slug: string }>, collections: Array<{ name: string, slug: string }>, images: Array<{ url: string, alt: string, height: number, width: number }> }> } | null };
+export type CollectionGetProductsListQuery = { collection?: { products: Array<{ id: string, name: string, description: string, slug: string, price: number, categories: Array<{ name: string, slug: string }>, collections: Array<{ name: string, slug: string, description: string }>, images: Array<{ url: string, alt: string, height: number, width: number }> }> } | null };
+
+export type CollectionItemFragmentFragment = { id: string, name: string, description: string, slug: string, products: Array<{ images: Array<{ url: string }> }> };
 
 export type CollectionsGetListQueryVariables = Exact<{
   countItems: Scalars['Int']['input'];
@@ -411,6 +413,19 @@ export class TypedDocumentString<TResult, TVariables>
     return this.value;
   }
 }
+export const CollectionItemFragmentFragmentDoc = new TypedDocumentString(`
+    fragment CollectionItemFragment on Collection {
+  id
+  name
+  description
+  slug
+  products {
+    images {
+      url
+    }
+  }
+}
+    `, {"fragmentName":"CollectionItemFragment"}) as unknown as TypedDocumentString<CollectionItemFragmentFragment, unknown>;
 export const ProductItemFragmentFragmentDoc = new TypedDocumentString(`
     fragment ProductItemFragment on Product {
   description
@@ -551,6 +566,7 @@ export const CategoriesGetListDocument = new TypedDocumentString(`
 export const CategoryGetProductsListDocument = new TypedDocumentString(`
     query CategoryGetProductsList($slug: String!) {
   category(slug: $slug) {
+    name
     products {
       id
       name
@@ -599,6 +615,7 @@ export const CollectionGetProductsListDocument = new TypedDocumentString(`
       collections {
         name
         slug
+        description
       }
       images {
         url
