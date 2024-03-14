@@ -1,9 +1,26 @@
 import { notFound } from "next/navigation";
 import { type Metadata } from "next";
 import { ProductList } from "@/app/components/organisms/ProductList";
-import { CategoryGetProductsListDocument } from "@/gql/graphql";
+import { CategoriesGetListDocument, CategoryGetProductsListDocument } from "@/gql/graphql";
 import { executeGraphql } from "@/app/api/graphqlApi";
 import Pagination from "@/app/components/atoms/Pagination";
+
+export const generateStaticParams = async () => {
+	const { categories } = await executeGraphql({
+		query: CategoriesGetListDocument,
+		variables: {
+			countItems: 8,
+			offset: 0,
+		},
+	});
+
+	return categories.data.map((category) => {
+		return {
+			categorySlug: category.slug,
+			pageNumber: "1",
+		};
+	});
+};
 
 export async function generateMetadata({
 	params,
