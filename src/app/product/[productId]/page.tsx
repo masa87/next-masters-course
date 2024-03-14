@@ -5,7 +5,11 @@ import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
 import { Suspense } from "react";
 import { formatPrice } from "@/app/components/utils";
-import { ProductGetItemByIdDocument, ReviewCreateDocument } from "@/gql/graphql";
+import {
+	ProductGetItemByIdDocument,
+	ProductsGetListByCountItemsDocument,
+	ReviewCreateDocument,
+} from "@/gql/graphql";
 import RelatedProductsList from "@/app/components/organisms/RelatedProductsList";
 import { executeGraphql } from "@/app/api/graphqlApi";
 import { addToCart, changeItemQuantity, createCart, getCartById } from "@/app/cart/actions";
@@ -13,6 +17,22 @@ import ReviewProductForm from "@/app/components/organisms/ReviewProductForm";
 import CustomButton from "@/app/components/atoms/CustomButton";
 import ReviewList from "@/app/components/organisms/ReviewList";
 import Spinner from "@/app/components/atoms/Spinner";
+
+export const generateStaticParams = async () => {
+	const { products } = await executeGraphql({
+		query: ProductsGetListByCountItemsDocument,
+		variables: {
+			countItems: 8,
+			offset: 0,
+		},
+	});
+
+	return products.data.map((product) => {
+		return {
+			productId: product.id,
+		};
+	});
+};
 
 export async function generateMetadata({
 	params,

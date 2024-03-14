@@ -1,7 +1,23 @@
 import { notFound } from "next/navigation";
-import { CollectionGetProductsListDocument } from "@/gql/graphql";
+import { CollectionGetProductsListDocument, CollectionsGetListDocument } from "@/gql/graphql";
 import { executeGraphql } from "@/app/api/graphqlApi";
 import { CollectionList } from "@/app/components/organisms/CollectionList";
+
+export const generateStaticParams = async () => {
+	const { collections } = await executeGraphql({
+		query: CollectionsGetListDocument,
+		variables: {
+			countItems: 8,
+			offset: 0,
+		},
+	});
+
+	return collections.data.map((collection) => {
+		return {
+			collectionSlug: collection.slug,
+		};
+	});
+};
 
 export async function generateMetadata({ params }: { params: { collectionSlug: string } }) {
 	const { collection } = await executeGraphql({
