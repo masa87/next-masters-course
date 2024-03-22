@@ -65,7 +65,6 @@ export default async function ProductPageWithPagination({
 					<ProductList products={products.data} page={parseInt(params.pageNumber)} />
 				</ul>
 			</Suspense>
-			{!searchParams && (
 				<Pagination
 					currentPage={parseInt(params.pageNumber)}
 					countItems={products.meta.count}
@@ -73,7 +72,6 @@ export default async function ProductPageWithPagination({
 					totalItemsCount={products.meta.total}
 					baseUrl={"/products"}
 				/>
-			)}
 		</section>
 	);
 }
