@@ -65,13 +65,13 @@ export default async function ProductPageWithPagination({
 					<ProductList products={products.data} page={parseInt(params.pageNumber)} />
 				</ul>
 			</Suspense>
-			<Pagination
-				currentPage={parseInt(params.pageNumber)}
-				countItems={products.meta.count}
-				itemsPerPage={countItems}
-				totalItemsCount={products.meta.total}
-				baseUrl={"/products"}
-			/>
+				<Pagination
+					currentPage={parseInt(params.pageNumber)}
+					countItems={products.meta.count}
+					itemsPerPage={countItems}
+					totalItemsCount={products.meta.total}
+					baseUrl={"/products"}
+				/>
 		</section>
 	);
 }
