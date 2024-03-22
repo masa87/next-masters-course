@@ -1,7 +1,6 @@
 import { cookies } from "next/headers";
 import Image from "next/image";
 import clsx from "clsx";
-import { redirect } from "next/navigation";
 import { type Metadata } from "next";
 import Link from "next/link";
 import { executeGraphql } from "../api/graphqlApi";
@@ -33,8 +32,8 @@ export default async function CartPage() {
 		cache: "no-store",
 	});
 
-	if (!cartId || cartFindOrCreate.items.length === 0) {
-		redirect("/");
+	if(!cartId) {
+		return null;
 	}
 
 	const getTotalPrice = () => {
