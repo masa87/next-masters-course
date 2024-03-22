@@ -33,9 +33,6 @@ export default async function CartPage() {
 		cache: "no-store",
 	});
 
-	if (!cartId || cartFindOrCreate.items.length === 0) {
-		redirect("/");
-	}
 
 	const getTotalPrice = () => {
 		let total = 0;
