@@ -56,7 +56,7 @@ export default async function CategoryProductPage({
 			</h1>
 
 			<ul
-				className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
+				className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 [&>*:nth-child(3)]:lg:hidden [&>*:nth-child(3)]:2xl:flex"
 				data-testid="products-list"
 			>
 				<CollectionList products={collection.products} />

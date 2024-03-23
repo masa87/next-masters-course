@@ -4,6 +4,7 @@ query CollectionGetProductsList($slug: String!) {
 			id
 			name
 			description
+			rating
 			slug
 			categories {
 				name

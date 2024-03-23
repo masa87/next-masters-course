@@ -328,14 +328,14 @@ export type CategoryGetProductsListQueryVariables = Exact<{
 }>;
 
 
-export type CategoryGetProductsListQuery = { category?: { name: string, products: Array<{ id: string, name: string, description: string, slug: string, price: number, categories: Array<{ name: string, slug: string }>, collections: Array<{ name: string, slug: string }>, images: Array<{ url: string, alt: string, height: number, width: number }>, reviews: Array<{ id: string, title: string, description: string, rating: number, email: string, author: string, updatedAt: unknown }> }> } | null };
+export type CategoryGetProductsListQuery = { category?: { name: string, products: Array<{ id: string, name: string, rating?: number | null, description: string, slug: string, price: number, categories: Array<{ name: string, slug: string }>, collections: Array<{ name: string, slug: string }>, images: Array<{ url: string, alt: string, height: number, width: number }>, reviews: Array<{ id: string, title: string, description: string, rating: number, email: string, author: string, updatedAt: unknown }> }> } | null };
 
 export type CollectionGetProductsListQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
 
 
-export type CollectionGetProductsListQuery = { collection?: { products: Array<{ id: string, name: string, description: string, slug: string, price: number, categories: Array<{ name: string, slug: string }>, collections: Array<{ name: string, slug: string, description: string }>, images: Array<{ url: string, alt: string, height: number, width: number }> }> } | null };
+export type CollectionGetProductsListQuery = { collection?: { products: Array<{ id: string, name: string, description: string, rating?: number | null, slug: string, price: number, categories: Array<{ name: string, slug: string }>, collections: Array<{ name: string, slug: string, description: string }>, images: Array<{ url: string, alt: string, height: number, width: number }> }> } | null };
 
 export type CollectionItemFragmentFragment = { id: string, name: string, description: string, slug: string, products: Array<{ images: Array<{ url: string }> }> };
 
@@ -570,6 +570,7 @@ export const CategoryGetProductsListDocument = new TypedDocumentString(`
     products {
       id
       name
+      rating
       description
       slug
       categories {
@@ -607,6 +608,7 @@ export const CollectionGetProductsListDocument = new TypedDocumentString(`
       id
       name
       description
+      rating
       slug
       categories {
         name
