@@ -45,27 +45,25 @@ export default async function CategoryProductPage({
 }: {
 	params: { categorySlug: string; pageNumber: string };
 }) {
-	const categories = await executeGraphql({
+	const { category } = await executeGraphql({
 		query: CategoryGetProductsListDocument,
 		variables: {
 			slug: params.categorySlug,
 		},
 	});
 
-	if (!categories.category?.products) {
+	if (!category?.products) {
 		throw notFound();
 	}
 
-	const productsToRender = categories.category.products;
-
 	return (
 		<section className="container mx-auto">
-			<h1 className="my-6 text-2xl font-semibold">{categories.category.name}</h1>
+			<h1 className="my-6 text-2xl font-semibold">{category.name}</h1>
 			<ul
-				className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
+				className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 [&>*:nth-child(7)]:lg:hidden [&>*:nth-child(7)]:2xl:flex"
 				data-testid="products-list"
 			>
-				<ProductList products={productsToRender} page={parseInt(params.pageNumber)} />
+				<ProductList products={category.products} page={parseInt(params.pageNumber)} />
 			</ul>
 			<Pagination
 				currentPage={parseInt(params.pageNumber)}
