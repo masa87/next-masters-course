@@ -21,7 +21,6 @@ const Counter = ({ quantity, productId, cartId }: CounterProps) => {
 	return (
 		<form className="flex w-16 flex-col items-center">
 			<button
-				type="submit"
 				data-testid="increment"
 				disabled={status.pending}
 				className="min-h-6 cursor-pointer"
@@ -40,7 +39,6 @@ const Counter = ({ quantity, productId, cartId }: CounterProps) => {
 			</p>
 
 			<button
-				type="submit"
 				data-testid="decrement"
 				disabled={status.pending}
 				className="min-h-6 cursor-pointer disabled:opacity-40"
