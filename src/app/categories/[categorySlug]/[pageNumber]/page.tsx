@@ -60,7 +60,7 @@ export default async function CategoryProductPage({
 		<section className="container mx-auto">
 			<h1 className="my-6 text-2xl font-semibold">{category.name}</h1>
 			<ul
-				className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 [&>*:nth-child(7)]:lg:hidden [&>*:nth-child(7)]:2xl:flex"
+				className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
 				data-testid="products-list"
 			>
 				<ProductList products={category.products} page={parseInt(params.pageNumber)} />
